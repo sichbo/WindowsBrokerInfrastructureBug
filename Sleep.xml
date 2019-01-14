@@ -1,0 +1,137 @@
+<WindowsPerformanceRecorder Author="Sichbo Interactuve" Version="1">
+  <Profiles>
+    <SystemCollector Id="SystemCollector_Connected_Standby" Name="DiagTrack_AlternativeTrace_KernelLogger">
+      <BufferSize Value="1024" />
+      <Buffers Value="40" PercentageOfTotalMemory="true" MaximumBufferSpace="2600" />
+    </SystemCollector>
+    <EventCollector Id="EventCollector_GeneralForConnectedStanby" Name="General For Connected Standby Event Collector">
+      <BufferSize Value="256" />
+      <Buffers Value="40" PercentageOfTotalMemory="true" MaximumBufferSpace="4000" />
+    </EventCollector>
+    <EventCollector Id="EventCollector_ConnectedStandby" Name="Connected Standby Event Collector">
+      <BufferSize Value="256" />
+      <Buffers Value="40" PercentageOfTotalMemory="true" MaximumBufferSpace="2600" />
+    </EventCollector>
+    <SystemProvider Id="SystemProvider_Connected_Standby">
+      <Keywords>
+        <Keyword Value="DiskIO" />
+        <Keyword Value="Loader" />
+        <Keyword Value="Power" />
+        <Keyword Value="ProcessThread" />
+        <Keyword Value="SampledProfile" />
+        <Keyword Value="IdleStates" />
+        <Keyword Value="CSwitch" />
+        <Keyword Value="ReadyThread" />
+        <Keyword Value="Timer" />
+        <Keyword Value="CpuConfig"/>
+        <CustomKeyword Value="0x44000000" />
+      </Keywords>
+      <Stacks>
+        <Stack Value="SampledProfile" />
+        <Stack Value="CSwitch"/>
+        <Stack Value="ReadyThread"/>
+        <Stack Value="ThreadCreate"/>
+        <Stack Value="ProcessCreate"/>
+        <Stack Value="TimerOneShot"/>
+        <Stack Value="TimerPeriodic"/>
+      </Stacks>
+    </SystemProvider>
+    <EventProvider Id="EventProvider_UTC" Name="UTC" NonPagedMemory="true" Level="4" />
+    <EventProvider Id="EventProvider_Microsoft-Windows-ProcessStateManager_0_0" Level="0" Name="d49918cf-9489-4bf1-9d7b-014d864cf71f" NonPagedMemory="true">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+      <CaptureStateOnSave Timeout="0">
+        <Keyword Value="0x0" />
+      </CaptureStateOnSave>
+    </EventProvider>
+    <EventProvider Id="EventProvider_Microsoft-Windows-Networking-RealTimeCommunication_4294967295_255" Level="255" Name="1e39b4ce-d1e6-46ce-b65b-5ab05d6cc266" NonPagedMemory="true">
+      <Keywords>
+        <Keyword Value="0xFFFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_Microsoft-Windows-Network-Connection-Broker_0_0" Level="0" Name="3eb875eb-8f4a-4800-a00b-e484c97d7551" NonPagedMemory="true">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_Microsoft-Windows-TCPIP_0_0" Level="0" Name="2f07e2ee-15db-40f1-90ef-9d7ba282188a" NonPagedMemory="true">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_Microsoft-Windows-BrokerInfrastructure_0_0" Level="0" Name="e6835967-e0d2-41fb-bcec-58387404e25a" NonPagedMemory="true">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+      <CaptureStateOnSave Timeout="0">
+        <Keyword Value="0x0" />
+      </CaptureStateOnSave>
+    </EventProvider>
+    <EventProvider Id="EventProvider_Microsoft-Windows-SleepStudy_0_0" Level="0" Name="d37687e7-8bf0-4d11-b589-a7abe080756a" NonPagedMemory="true">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_Microsoft-Windows-Power-CAD" Name="DABA4D32-CC40-4266-BB95-C30344DBC680" NonPagedMemory="true" EventKey="true">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+      <CaptureStateOnStart Timeout="0">
+        <Keyword Value="0x0" />
+      </CaptureStateOnStart>
+      <CaptureStateOnSave Timeout="0">
+        <Keyword Value="0x0" />
+      </CaptureStateOnSave>
+    </EventProvider>
+    <EventProvider Id="EventProvider_Microsoft.Windows.Power.CAD" Name="4CAAD201-C882-42C1-AE13-5408E834517B" NonPagedMemory="true" EventKey="true">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+      <CaptureStateOnStart Timeout="0">
+        <Keyword Value="0x0" />
+      </CaptureStateOnStart>
+      <CaptureStateOnSave Timeout="0">
+        <Keyword Value="0x0" />
+      </CaptureStateOnSave>
+    </EventProvider>
+
+    <Profile Id="ConnectedStandbyDiagnosis.Verbose.Memory" Name="ConnectedStandbyDiagnosis" Description="Connected Standby Diagnosis" LoggingMode="Memory" DetailLevel="Verbose">
+      <ProblemCategories>
+        <ProblemCategory Value="First Level Triage" />
+      </ProblemCategories>
+      <Collectors>
+        <SystemCollectorId Value="SystemCollector_Connected_Standby">
+          <SystemProviderId Value="SystemProvider_Connected_Standby" />
+        </SystemCollectorId>
+        <EventCollectorId Value="EventCollector_GeneralForConnectedStanby">
+          <EventProviders>
+            <EventProviderId Value="EventProvider_UTC" />
+          </EventProviders>
+        </EventCollectorId>
+        <EventCollectorId Value="EventCollector_ConnectedStandby">
+          <EventProviders>
+            <EventProviderId Value="EventProvider_Microsoft-Windows-ProcessStateManager_0_0" />
+            <EventProviderId Value="EventProvider_Microsoft-Windows-Networking-RealTimeCommunication_4294967295_255" />
+            <EventProviderId Value="EventProvider_Microsoft-Windows-Network-Connection-Broker_0_0" />
+            <EventProviderId Value="EventProvider_Microsoft-Windows-TCPIP_0_0" />
+            <EventProviderId Value="EventProvider_Microsoft-Windows-BrokerInfrastructure_0_0" />
+            <EventProviderId Value="EventProvider_Microsoft-Windows-SleepStudy_0_0" />
+          </EventProviders>
+        </EventCollectorId>
+      </Collectors>
+    </Profile>
+  </Profiles>
+  <TraceMergeProperties>
+    <TraceMergeProperty Id="TraceMerge_Default" Name="TraceMerge_Default">
+      <CustomEvents>
+        <CustomEvent Value="ImageId" />
+        <CustomEvent Value="BuildInfo" />
+        <CustomEvent Value="VolumeMapping" />
+        <CustomEvent Value="EventMetadata" />
+        <CustomEvent Value="PerfTrackMetadata" />
+        <CustomEvent Value="WinSAT" />
+      </CustomEvents>
+    </TraceMergeProperty>
+  </TraceMergeProperties>
+</WindowsPerformanceRecorder>
